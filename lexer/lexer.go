@@ -5,20 +5,14 @@ import (
 )
 
 type Lexer struct {
-	input string
-	position int // Position to current  char in input
-	readPosition int // Current reading position in input (after current char)
-	ch byte // Current char under examination
-}
-
-func New(input string) *Lexer {
-	l := &Lexer{input: input}
-	l.readChar()
-	return l
+	input        string // Src code saved in input
+	position     int  // Position to current  char in input
+	readPosition int  // Current reading position in input (after current char)
+	ch           byte // Current char under examination
 }
 
 func (l *Lexer) readChar() {
-	if l.readPosition >= len(l.input){
+	if l.readPosition >= len(l.input) {
 		l.ch = 0
 	} else {
 		l.ch = l.input[l.readPosition]
@@ -54,9 +48,12 @@ func (l *Lexer) NextToken() token.Token {
 	return tok
 }
 
+func New(input string) *Lexer {
+	l := &Lexer{input: input}
+	l.readChar()
+	return l
+}
+
 func newToken(tokenType token.TokenType, ch byte) token.Token {
-	return token.Token {
-		Type:    tokenType,
-		Literal: string(ch),
-	}
+	return token.Token{Type: tokenType, Literal: string(ch)}
 }

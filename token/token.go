@@ -2,18 +2,18 @@ package token
 
 const (
 	ILLEGAL = "ILLEGAL"
-	EOF = "EOF"
+	EOF     = "EOF"
 
 	// Identifiers + literals
 	IDENT = "INDENT"
-	INT = "INT"
+	INT   = "INT"
 
 	// Operators
 	ASSIGN = "="
-	PLUS = "+"
+	PLUS   = "+"
 
 	// Delimiters
-	COMMA = ","
+	COMMA     = ","
 	SEMICOLON = ";"
 
 	LPAREN = "("
@@ -23,7 +23,7 @@ const (
 
 	// Keywords
 	FUNCTION = "FUNCTION"
-	LET = "LET"
+	LET      = "LET"
 )
 
 type TokenType string
