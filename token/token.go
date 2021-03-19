@@ -26,9 +26,9 @@ const (
 	LET = "LET"
 )
 
-type tokenType string
+type TokenType string
 
 type Token struct {
-	Type tokenType
+	Type    TokenType
 	Literal string
 }
