@@ -1,9 +1,7 @@
 package lexer
 
 import (
-	"fmt"
 	"interpreter/token"
-	"math/rand"
 	"testing"
 )
 
