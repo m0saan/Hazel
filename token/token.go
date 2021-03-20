@@ -5,7 +5,7 @@ const (
 	EOF     = "EOF"
 
 	// Identifiers + literals
-	INDENT = "INDENT"
+	IDENT = "IDENT"
 	INT   = "INT"
 
 	// Operators
@@ -42,5 +42,5 @@ func LookupIndent(indent string) TokenType {
 	if tok, ok := keywords[indent]; ok {
 		return tok
 	}
-	return INDENT
+	return IDENT
 }
