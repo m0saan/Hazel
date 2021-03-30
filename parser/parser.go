@@ -2,8 +2,8 @@ package parser
 
 import (
 	"Interpreter/ast"
-	"Interpreter/token"
 	"Interpreter/lexer"
+	"Interpreter/token"
 )
 
 type Parser struct {
@@ -29,6 +29,25 @@ func (p *Parser) nextToken()  {
 }
 
 func (p *Parser) ParseProgram() *ast.Program {
-	return nil
+	program := &ast.Program{}
+	program.Statements = []ast.Statement{}
+
+	for p.curToken.Type != token.EOF {
+		stmt := p.ParseProgram()
+		if stmt != nil {
+			program.Statements = append(program.Statements, stmt)
+		}
+		p.nextToken()
+	}
+	return program
+}
+
+func (p *Parser) ParseStatement() ast.Statement {
+	switch p.curToken.Type {
+	case token.LET:
+		return p.ParseStatement()
+	default:
+		return nil
+	}
 }
 

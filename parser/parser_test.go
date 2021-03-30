@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestLetStatments(t *testing.T) {
+func TestLetStatements(t *testing.T) {
 
 	input := `
 let x = 5;
@@ -54,6 +54,11 @@ func testLetStatments(t *testing.T, s ast.Statement, name string) bool {
 
 	if letStmt.Name.Value != name {
 		t.Errorf("letStmt.Name.Value not '%s'. got=%s", name, letStmt.Name.Value)
+		return false
+	}
+
+	if letStmt.Name.TokenLiteral() != name {
+		t.Errorf("s.Name not '%s'. got=%s", name, letStmt.Name)
 		return false
 	}
 	return true
