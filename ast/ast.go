@@ -19,7 +19,7 @@ type Expression interface {
 }
 
 type Program struct {
-	Statements []Statement
+	Statements []Statement // slice of AST nodes that implement the Statement interface.
 }
 
 func (p Program) TokenLiteral() string {
