@@ -36,6 +36,7 @@ type LetStatement struct {
 	Value Expression
 }
 
+// LetStatement type implements both Node and Statement interfaces.
 func (ls *LetStatement) statementNode()  {}
 func (ls *LetStatement) TokenLiteral() string { return ls.Token.Literal }
 
@@ -44,5 +45,6 @@ type Identifier struct {
 	Value string
 }
 
+// Identifier type implements both the Node and Expression interface.
 func (i *Identifier) expressionNode()  {}
 func (i *Identifier) TokenLiteral() string { return i.Token.Literal }
