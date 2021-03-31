@@ -29,6 +29,33 @@ func New(l *lexer.Lexer) *Parser {
 	return p
 }
 
+
+/*
+function parseProgram() {
+	program = newProgramASTNode()
+	advanceTokens()
+	for (currentToken() != EOF_TOKEN) {
+	statement = null
+
+	if (currentToken() == LET_TOKEN) {
+		statement = parseLetStatement()
+	} else if (currentToken() == RETURN_TOKEN) {
+		statement = parseReturnStatement()
+	} else if (currentToken() == IF_TOKEN) {
+		statement = parseIfStatement()
+	}
+
+	if (statement != null) {
+		program.Statements.push(statement)
+	}
+
+		advanceTokens()
+	} // For loop ending curly brace.
+
+	return program
+}
+ */
+
 func (p *Parser) ParseProgram() *ast.Program {
 	program := &ast.Program{}
 	program.Statements = []ast.Statement{}
@@ -52,13 +79,41 @@ func (p *Parser) ParseStatement() ast.Statement {
 	}
 }
 
-func (p *Parser) parseLetStatements() *ast.LetStatement {
-	stmt  := &ast.LetStatement{Token: p.curToken}
 
+
+/* Parsing let statements pseudo code.
+
+	function parseLetStatement() {
+		advanceTokens()
+  		identifier = parseIdentifier()
+
+		advanceTokens()
+
+		if currentToken() != EQUAL_TOKEN {
+			parseError("no equal sign!") return null
+		}
+
+		advanceTokens()
+
+		value = parseExpression()
+		variableStatement = newVariableStatementASTNode()
+		variableStatement.identifier = identifier
+		variableStatement.value = value
+		return variableStatement
+}
+ */
+
+func (p *Parser) parseLetStatements() *ast.LetStatement {
+
+	// constructs an *ast.LetStatement node with the token it’s currently sitting on (a token.LET token)
+	stmt  := &ast.LetStatement{ Token: p.curToken }
+
+	// assert that the next token is an Identifier.
 	if !p.expectPeek(token.IDENT) {
 		return nil
 	}
 
+	// construct an *ast.Identifier node.
 	stmt.Name = &ast.Identifier{ Token: p.curToken,  Value: p.curToken.Literal }
 
 	if !p.expectPeek(token.ASSIGN) {
