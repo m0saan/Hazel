@@ -10,8 +10,8 @@ func TestLetStatements(t *testing.T) {
 
 	input := `
 		let x  5;
-   		let y = 10;
-   		let foobar = 838383;
+   		let  = 10;
+   		let  838383;
 `
 	l := lexer.New(input) // Create a lexer instance from the input string
 	p := New(l) // Create a parser instance from the lexer.
@@ -73,8 +73,8 @@ func checkParserErrors(t *testing.T, p *Parser)  {
 	}
 
 	t.Errorf("parser has %d errors", len(errors))
-	for _, error := range errors {
-		t.Errorf("parser error: %q", error)
+	for _, msg := range errors {
+		t.Errorf("parser msg: %q", msg)
 	}
 
 	t.FailNow()
