@@ -156,6 +156,7 @@ func (p *Parser) expectPeek(t token.TokenType) bool {
 		p.nextToken()
 		return true
 	} else {
+		p.peekErrors(t)
 		return false
 	}
 }

@@ -9,7 +9,7 @@ import (
 func TestLetStatements(t *testing.T) {
 
 	input := `
-		let x = 5;
+		let x  5;
    		let y = 10;
    		let foobar = 838383;
 `
@@ -17,6 +17,7 @@ func TestLetStatements(t *testing.T) {
 	p := New(l) // Create a parser instance from the lexer.
 
 	program := p.ParseProgram()
+	checkParserErrors(t,p)
 	if program == nil {
 		t.Fatalf("ParseProgram() returned nil")
 	}
@@ -62,4 +63,19 @@ func testLetStatements(t *testing.T, s ast.Statement, name string) bool {
 		return false
 	}
 	return true
+}
+
+func checkParserErrors(t *testing.T, p *Parser)  {
+	errors := p.Errors()
+
+	if len(errors) == 0 {
+		return
+	}
+
+	t.Errorf("parser has %d errors", len(errors))
+	for _, error := range errors {
+		t.Errorf("parser error: %q", error)
+	}
+
+	t.FailNow()
 }
